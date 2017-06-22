@@ -19,8 +19,8 @@ class deq
   public:
     bool empty() const noexcept;
     size_t size() const noexcept;
-    
-    void push_back(const T& t);
+
+    void push_back(const T &t);
 
   private:
     static const size_t ImplSize = N;
@@ -46,7 +46,7 @@ size_t deq<T, N, B>::size() const noexcept
 }
 
 template <typename T, size_t N, typename B>
-void deq<T, N, B>::push_back(const T& t)
+void deq<T, N, B>::push_back(const T &t)
 {
     const auto bufno = m_end / ImplSize;
     const auto idx = m_end % ImplSize;
@@ -54,6 +54,6 @@ void deq<T, N, B>::push_back(const T& t)
     {
         m_v.push_back(new buffer_t);
     }
-    ( *m_v[bufno])[idx] = t;
+    (*m_v[bufno])[idx] = t;
     ++m_end;
 }
