@@ -84,6 +84,31 @@ TEST(DeqTestPopBack, Many)
     EXPECT_EQ(0, di.size());
 }
 
+TEST(DeqTestPushPopBack, Many)
+{
+    const auto nPush1 = 150;
+    const auto nPush2 = 99;
+    const auto nPop1 = 123;
+    const auto nPop2 = 86;
+
+    deq<int> di;
+
+    fillBack(di, nPush1);
+    for (size_t i = nPop1; i > 0; --i)
+    {
+        di.pop_back();
+    }
+
+    fillBack(di, nPush2);
+    for (size_t i = nPop2; i > 0; --i)
+    {
+        di.pop_back();
+    }
+
+    EXPECT_FALSE(di.empty());
+    EXPECT_EQ(nPush1 + nPush2 - nPop1 - nPop2, di.size());
+}
+
 int main(int argc, char **argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
