@@ -1,0 +1,31 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "fileLocation": ["relative", "${workspaceRoot}"],
+    "isShellCommand": true,
+    "showOutput": "always",
+    "tasks": [
+        {
+            "taskName": "build",
+            "command": "g++",
+            "args": ["-std=c++14", "-Wall", "-pthread", "-o${fileBasenameNoExtension}", "${fileBasename}", "libs/libgtest.a", "libs/libgmock.a", "libs/libgtest_main.a"],
+            "isShellCommand": true,
+            "isBuildCommand": true
+        },
+                {
+            "taskName": "debug build",
+            "command": "g++",
+            "args": ["-g", "-std=c++14", "-Wall", "-pthread", "-o${fileBasenameNoExtension}", "${fileBasename}", "libs/libgtest.a", "libs/libgmock.a", "libs/libgtest_main.a"],
+            "isShellCommand": true,
+            "isBuildCommand": true
+        },
+        {
+            "taskName": "run",
+            "command": "./${fileBasenameNoExtension}",
+            "args": [],
+            "isShellCommand": true,
+            "isBackground": false
+        }
+    ]
+}

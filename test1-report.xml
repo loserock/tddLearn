@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="2" failures="1" disabled="0" errors="0" timestamp="2017-06-22T11:19:28" time="0.001" name="AllTests">
+  <testsuite name="FactorialTest" tests="2" failures="1" disabled="0" errors="0" time="0.001">
+    <testcase name="withPositiveNumber" status="run" time="0.001" classname="FactorialTest">
+      <failure message="minimath_test.cpp:7&#x0A;      Expected: 120&#x0A;To be equal to: mm.factorial(5)&#x0A;      Which is: 1" type=""><![CDATA[minimath_test.cpp:7
+      Expected: 120
+To be equal to: mm.factorial(5)
+      Which is: 1]]></failure>
+    </testcase>
+    <testcase name="withZero" status="run" time="0" classname="FactorialTest" />
+  </testsuite>
+</testsuites>

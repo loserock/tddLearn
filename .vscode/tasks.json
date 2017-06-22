@@ -1,0 +1,49 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "fileLocation": ["relative", "${workspaceRoot}"],
+    "isShellCommand": true,
+    "showOutput": "always",
+    "tasks": [
+        {
+            "taskName": "build current",
+            "command": "g++",
+            "args": ["-std=c++14", "-Wall", "-pthread", "-o${fileBasenameNoExtension}", "${fileBasename}", "libs/libgtest.a", "libs/libgmock.a", "libs/libgtest_main.a"],
+            "isShellCommand": true
+        },
+        {
+            "taskName": "debug build current",
+            "command": "g++",
+            "args": ["-g", "-std=c++14", "-Wall", "-pthread", "-o${fileBasenameNoExtension}", "${fileBasename}", "libs/libgtest.a", "libs/libgmock.a", "libs/libgtest_main.a"],
+            "isShellCommand": true
+        },
+        {
+            "taskName": "run current",
+            "command": "./${fileBasenameNoExtension}",
+            "args": [],
+            "isShellCommand": true,
+            "isBackground": false
+        },
+        {
+            "taskName": "build main",
+            "command": "g++",
+            "args": ["-std=c++14", "-Wall", "-pthread", "-o${workspaceRootFolderName}", "main.cpp", "libs/libgtest.a", "libs/libgmock.a", "libs/libgtest_main.a"],
+            "isShellCommand": true,
+            "isBuildCommand": true
+        },
+        {
+            "taskName": "debug build main",
+            "command": "g++",
+            "args": ["-g", "-std=c++14", "-Wall", "-pthread", "-o${workspaceRootFolderName}", "main.cpp", "libs/libgtest.a", "libs/libgmock.a", "libs/libgtest_main.a"],
+            "isShellCommand": true
+        },
+        {
+            "taskName": "run main",
+            "command": "./${workspaceRootFolderName}",
+            "args": [],
+            "isShellCommand": true,
+            "isBackground": false
+        }
+    ]
+}
