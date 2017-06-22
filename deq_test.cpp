@@ -42,8 +42,8 @@ TEST(DeqTestPushBack, AddMany)
 {
     deq<int> di;
 
-    size_t s = 10;  ///< number of inserted elements
-    size_t cn = 42; ///< number of cycles
+    const auto s = 10;  ///< number of inserted elements
+    const auto cn = 42; ///< number of cycles
     for (size_t i = 0; i < cn; ++i)
     {
         fillBack(di, s);
@@ -51,6 +51,37 @@ TEST(DeqTestPushBack, AddMany)
         ASSERT_FALSE(di.empty());
         ASSERT_EQ((i + 1) * s, di.size());
     }
+}
+
+TEST(DeqTestPopBack, OnlyOne)
+{
+    deq<int> di;
+
+    di.push_back(42);
+    di.pop_back();
+
+    EXPECT_TRUE(di.empty());
+    EXPECT_EQ(0, di.size());
+}
+
+TEST(DeqTestPopBack, Many)
+{
+    deq<int> di;
+
+    const auto s = 150;
+    fillBack(di, s);
+
+    for (size_t i = s; i > 1; --i)
+    {
+        di.pop_back();
+
+        ASSERT_FALSE(di.empty());
+        ASSERT_EQ(i - 1, di.size());
+    }
+    di.pop_back();
+
+    EXPECT_TRUE(di.empty());
+    EXPECT_EQ(0, di.size());
 }
 
 int main(int argc, char **argv)
