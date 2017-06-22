@@ -9,6 +9,16 @@ TEST(DeqTestCreate, Trivial)
     EXPECT_EQ(0, di.size());
 }
 
+TEST(DeqTestPushBack, AfterEmpty)
+{
+    deq<int> di;
+
+    di.push_back(1);
+
+    EXPECT_FALSE( di.empty());
+    EXPECT_EQ(1, di.size());
+}
+
 int main(int argc, char **argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
