@@ -23,6 +23,9 @@ class deq
     void push_back(const T &t);
     void pop_back() /* noexcept */;
 
+    T &operator[](size_t ind) noexcept;
+    const T &operator[](size_t) const noexcept;
+
   private:
     static const size_t ImplSize = N;
 
@@ -67,4 +70,20 @@ void deq<T, N, B>::pop_back()
     T _t;
     std::swap((*m_v[bufno])[idx], _t);
     --m_end;
+}
+
+template <typename T, size_t N, typename B>
+T &deq<T, N, B>::operator[](size_t idx) noexcept
+{
+    const auto bufno = idx / ImplSize;
+    const auto i = idx % ImplSize;
+    return (*m_v[bufno])[i];
+}
+
+template <typename T, size_t N, typename B>
+const T &deq<T, N, B>::operator[](size_t idx) const noexcept
+{
+    const auto bufno = idx / ImplSize;
+    const auto i = idx % ImplSize;
+    return (*m_v[bufno])[i];
 }

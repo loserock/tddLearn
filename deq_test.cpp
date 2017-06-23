@@ -109,6 +109,40 @@ TEST(DeqTestPushPopBack, Many)
     EXPECT_EQ(nPush1 + nPush2 - nPop1 - nPop2, di.size());
 }
 
+TEST(DeqTestIndexOperator, AfterPushBack)
+{
+    deq<int> di;
+    const auto s = 200;
+
+    fillBack(di, s);
+    for (size_t i = 0; i < s; ++i)
+    {
+        ASSERT_EQ(i * i, di[i]);
+    }
+
+    const deq<int> cdi = di;
+
+    for (size_t i = 0; i < s; ++i)
+    {
+        ASSERT_EQ(i * i, cdi[i]);
+    }
+
+    di.pop_back();
+    for (size_t i = 0; i < s - 1; ++i)
+    {
+        ASSERT_EQ(i * i, di[i]);
+    }
+    for (size_t i = 0; i < s; ++i)
+    {
+        ASSERT_EQ(i * i, cdi[i]);
+    }
+
+    di.push_back(42);
+
+    EXPECT_EQ(42, di[s - 1]);
+    EXPECT_EQ((s - 1) * (s - 1), cdi[s - 1]);
+}
+
 int main(int argc, char **argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
