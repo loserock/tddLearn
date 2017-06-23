@@ -143,6 +143,73 @@ TEST(DeqTestIndexOperator, AfterPushBack)
     EXPECT_EQ((s - 1) * (s - 1), cdi[s - 1]);
 }
 
+TEST(DeqTestCopy, EmptyAfterCreate)
+{
+    deq<int> di;
+    deq<int> dj = di;
+
+    EXPECT_TRUE(dj.empty());
+    EXPECT_EQ(0, dj.size());
+
+    deq<int> dk;
+    dk = di;
+
+    EXPECT_TRUE(dk.empty());
+    EXPECT_EQ(0, dk.size());
+}
+
+TEST(DeqTestCopy, EmptyAfterPushPop)
+{
+    deq<int> di;
+    const auto s = 200;
+
+    fillBack(di, s);
+    for (size_t i = s; i > 0; --i)
+    {
+        di.pop_back();
+    }
+
+    deq<int> dj = di;
+
+    EXPECT_TRUE(dj.empty());
+    EXPECT_EQ(0, dj.size());
+
+    deq<int> dk;
+    dk = di;
+
+    EXPECT_TRUE(dk.empty());
+    EXPECT_EQ(0, dk.size());
+}
+
+TEST(DeqTestCopy, AfterPushPop)
+{
+    deq<int> di;
+    const auto s1 = 200, s2 = 100;
+
+    fillBack(di, s1);
+    for (size_t i = s1; i > s2; --i)
+    {
+        di.pop_back();
+    }
+
+    deq<int> dj = di;
+    deq<int> dk;
+    dk = di;
+    for (size_t i = 0; i < s2; ++i)
+    {
+        di[i] = 100 + i;
+        dj[i] = 400 + i;
+        dk[i] = 700 + i;
+    }
+    
+    for (size_t i = 0; i < s2; ++i)
+    {
+        ASSERT_EQ(100 + i, di[i]);
+        ASSERT_EQ(400 + i, dj[i]);
+        ASSERT_EQ(700 + i, dk[i]);
+    }
+}
+
 int main(int argc, char **argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
