@@ -324,3 +324,33 @@ Porkoláb Zoltán, ma folytatjuk a kódolást, és mockkolás lesz főleg.
  - _félhivatalos_ de szabványba beférő módszer `private` adattagokhoz :)
     - [link to presentation](https://www.meetup.com/Hungarian-Cpp-Community/events/227145136/)
     - szerintem ez egy batár nagy leak, de mindegy :lol:
+
+### Mocking defaults
+
+ - mock objektummal replace-eljük az objektumot, hogy a _viselkedését_ szimulálni tudjuk
+    - tehát a teljes adat struktúrát a háttérben pl. nem feltétlen
+ - _function call interception_ (FCI), gcc/clang eleve hookokat fordít minden függvény elejére, és így lehet csinálni velük "bármit" (ennek járjunk utána!)
+ - gmock
+    - `MOCK_METHOD*` makrók
+    - `EXPECT_CALL` szöszörgések
+        - `EXPECT_THAT`, `ASSERT_THAT`
+        - wildcards
+            - `_`: any values of any type
+            - `A<type>()` vagy `AN<type>()`: any value of type `type`
+        - rengeteg _matcher_
+            - ...
+        - rengeteg _action_
+    - lehet `SEQUENCE` objektumokat csinálni
+        - `using ::testing::Sequence;`
+        - lehet úgy, hogy `EXPECT_CALL(...).InSequence(range1, range2).WillOnce(Return(true))`
+        - vagy scope-on belül is:
+            ```
+            {
+                InSequence dummy;
+                EXPECT_CALL(...)...;
+                ...
+                EXPECT_CALL(...)...;
+            }
+            ```
+    - van `NiceMock<mocktype> ` is, ez a mockolt objektumot "okosabban" hozza létre a hívások szempontjából (pl. nem fog a futtatás warningokat dobni)
+        
