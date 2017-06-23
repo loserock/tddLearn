@@ -41,9 +41,7 @@ struct private_access2
     friend MockVector deq<int, 16, MockVector>::*getMock() { return PtrValue; }
 };
 
-// TODO
-MockVector deq<int, 16, MockVector>::*
-getMock();
+MockVector deq<int, 16, MockVector>::*getMock();
 template struct private_access2<&deq<int, 16, MockVector>::m_v>;
 #pragma endregion
 //---------------------------------------
