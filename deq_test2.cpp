@@ -10,8 +10,16 @@ using vec_t = std::vector<vcon_t>;
 
 struct MockVector : public vec_t
 {
+    MockVector()
+    {
+        ON_CALL(*this, size()).WillByDefault(Invoke(&base, &vec_t::size));
+        ON_CALL(*this, push_back(_)).WillByDefault(Invoke(&base, static_cast<void (vec_t::*)(const vcon_t &)>(&vec_t::push_back)));
+    }
+
     MOCK_CONST_METHOD0(size, size_t());
     MOCK_METHOD1(push_back, void(vcon_t));
+
+    vec_t &base = *this;
 };
 
 //---------------------------------------
@@ -98,13 +106,13 @@ template <typename C, typename F, typename P>
 
 TEST(DeqTestCreate, Trivial)
 {
-    deq<int,16,MockVector> di;
-    MockVector deq<int,16,MockVector>::* vp = getMock();
+    deq<int, 16, MockVector> di;
+    MockVector deq<int, 16, MockVector>::*vp = getMock();
     MockVector &vec = di.*vp;
 
     EXPECT_CALL(vec, push_back(_)).Times(0);
     EXPECT_CALL(vec, size()).Times(1);
-    
+
     EXPECT_TRUE(di.empty());
     EXPECT_EQ(0, di.size());
 
@@ -114,7 +122,6 @@ TEST(DeqTestCreate, Trivial)
 
 TEST(DeqTestAt, AfterEmpty)
 {
-    //deq<int, 16, MockVector> di;
     deq<int> di;
 
     using at_t = int &(deq<int>::*)(size_t);
@@ -345,8 +352,11 @@ TEST(DeqTestCopy, SelfAssignAfterPushPop)
 
 TEST(DeqTestPushBack, AfterEmpty)
 {
-    deq<int> di;
+    deq<int, 16, MockVector> di;
+    MockVector deq<int, 16, MockVector>::*vp = getMock();
+    MockVector &vec = di.*vp;
 
+    EXPECT_CALL(vec, push_back(_)).Times(1);
     di.push_back(1);
 
     EXPECT_FALSE(di.empty());
