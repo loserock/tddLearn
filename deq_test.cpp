@@ -195,18 +195,47 @@ TEST(DeqTestCopy, AfterPushPop)
     deq<int> dj = di;
     deq<int> dk;
     dk = di;
+
+    EXPECT_EQ(s2, di.size());
+    EXPECT_EQ(s2, dj.size());
+    EXPECT_EQ(s2, dk.size());
+
     for (size_t i = 0; i < s2; ++i)
     {
         di[i] = 100 + i;
         dj[i] = 400 + i;
         dk[i] = 700 + i;
     }
-    
+
     for (size_t i = 0; i < s2; ++i)
     {
         ASSERT_EQ(100 + i, di[i]);
         ASSERT_EQ(400 + i, dj[i]);
         ASSERT_EQ(700 + i, dk[i]);
+    }
+}
+
+TEST(DeqTestCopy, SelfAssignAfterPushPop)
+{
+    deq<int> di;
+    const auto s1 = 200, s2 = 100;
+
+    fillBack(di, s1);
+    for (size_t i = s1; i > s2; --i)
+    {
+        di.pop_back();
+    }
+    for (size_t i = 0; i < s2; ++i)
+    {
+        di[i] = 100 + i;
+    }
+    di = di;
+
+    EXPECT_EQ(s2, di.size());
+
+    for (size_t i = 0; i < s2; ++i)
+    {
+        ASSERT_EQ(100 + i, di[i]);
     }
 }
 

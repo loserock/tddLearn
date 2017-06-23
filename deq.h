@@ -17,6 +17,10 @@ template <typename T, size_t N = 16, typename B = std::vector<std::array<T, N> *
 class deq
 {
   public:
+    deq() = default;
+    deq(const deq &rhs);
+    deq &operator=(const deq &rhs);
+
     bool empty() const noexcept;
     size_t size() const noexcept;
 
@@ -36,6 +40,26 @@ class deq
     size_t m_beg = 0; ///< begin position (relative?)
     size_t m_end = 0; ///< end position (relative to the begin of the first bucket)
 };
+
+template <typename T, size_t N, typename B>
+deq<T, N, B>::deq(const deq &rhs)
+{
+    m_v.reserve(rhs.m_v.size());
+    for (size_t i = 0; i < rhs.size(); ++i)
+    {
+        push_back(rhs[i]);
+    }
+}
+
+template <typename T, size_t N, typename B>
+deq<T, N, B> &deq<T, N, B>::operator=(const deq &rhs)
+{
+    deq tmp(rhs);
+    m_v.swap(tmp.m_v);
+    m_beg = tmp.m_beg;
+    m_end = tmp.m_end;
+    return *this;
+}
 
 template <typename T, size_t N, typename B>
 bool deq<T, N, B>::empty() const noexcept
