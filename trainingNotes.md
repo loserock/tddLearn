@@ -320,3 +320,7 @@ Porkoláb Zoltán, ma folytatjuk a kódolást, és mockkolás lesz főleg.
  - megint előjött: `const_cast` is evin (undefined behaviour)
     - pointeres értéket const caatoljuk, elvész az érték
     - ismétlés: ilyenkor `volatile` a barátunk (nem fog rá optimalizálni a compiler, jó lesz az érték `const_cast` után is)
+ - gyakorlatban csináltunk assertion result elkapó függvényt exceptionhöz
+ - _félhivatalos_ de szabványba beférő módszer `private` adattagokhoz :)
+    - [link to presentation](https://www.meetup.com/Hungarian-Cpp-Community/events/227145136/)
+    - szerintem ez egy batár nagy leak, de mindegy :lol:
