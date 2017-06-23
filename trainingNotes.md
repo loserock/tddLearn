@@ -353,4 +353,39 @@ Porkoláb Zoltán, ma folytatjuk a kódolást, és mockkolás lesz főleg.
             }
             ```
     - van `NiceMock<mocktype> ` is, ez a mockolt objektumot "okosabban" hozza létre a hívások szempontjából (pl. nem fog a futtatás warningokat dobni)
-        
+
+### Static analyzers
+
+ - nagyon drágák és ingyenesek
+    - coverity, clang, cppcheck...
+    - clang static analyzer előtt elég szépnek tűnő jövő áll (támogatja a Google, az Apple és a Sony is)
+    - a coverity szereti heurisztikákkal szelektálni a vak riasztásokat (van persze így is sok)
+ - három nagy csoport van
+    - text pattern matching
+        - régen a CppCheck ilyen volt, már okosabb
+        - mindent átalakított, utasításokat egysorosra, változó neveket egy azonos karakterre
+        - ezen így text pattern matchinget lehetett csinálni
+    - AST Matchers
+        - pl. a clang tidy
+        - figyeli a szabályokat, de azt nem tudja, hogy futás közben valami csúnya dolog történt-e (pl. paraméter függő pointer alloc)
+    - symbolic execution
+        - pl. a clang static analyzer vagy a coverity
+        - ez minden lehetséges elágazásnál szétválasztja a szimulációs gráfot
+        - ez exponenciális algoritmus, tehát gyorsan burjánzik
+        - maga a teszt egy mélységi bejárás lesz
+        - így viszont a feltételek előállási módját is meg fogja tudni mondani (hogyan jutottunk a problémás állapothoz)
+        - szélességi bejárással is lehetne, jobb lenne, de úgy simán elfogyhat a RAM
+        - budget: feltételes limit szélességi bejárásra, ami felett amúgy megy tovább mélységivel
+            - pl. ciklusnál egy ideig tartja számon a feltételeket, aztán kidobja az egészet a kukába és inkább megy tovább :lol:
+ - segíthető a folyamat a kódolással is
+    - c++-ban is van már pl. `__attribute__(())`, jelezhető egy függvénynek, hogy nonzero vagy ilyesmi
+    - okos assertekkel lehet segíteni a hibakeresést
+ - CTU, Cross Translation Unit
+    - ha egy hívás bemenne egy másik fájlba, ez akkor is követi a chaint (a hagyományos clang pl még ezt nem teszi, mostanában kezdi ezt tudni)
+    - így összetettebb és hosszabb hívási láncokkal több bugot meg lehet fogni
+    - viszont néhány el is veszhet
+        - CTU nélkül mindent megnéz röviden
+        - CTU módban lehet, hogy egy hívási lánc túl mély, ezért eldobjuk, vagyis magáig a hibáig soha nem jutunk el
+        - van ilyen, de azért jóval kevesebb a veszteség, mint a nyereség, jelenleg
+    - optimalizálják most ezt a módot
+
