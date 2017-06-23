@@ -311,3 +311,12 @@ Porkoláb Zoltán, gyakorlati előadás várható egy fél napos bevezető után
     - illetve a törzsben magadható maga a futtatni kívánt teszt is
     - mindez aszinkron fut
 
+## DAY 3
+
+Porkoláb Zoltán, ma folytatjuk a kódolást, és mockkolás lesz főleg.
+
+### Coding notes
+
+ - megint előjött: `const_cast` is evin (undefined behaviour)
+    - pointeres értéket const caatoljuk, elvész az érték
+    - ismétlés: ilyenkor `volatile` a barátunk (nem fog rá optimalizálni a compiler, jó lesz az érték `const_cast` után is)
