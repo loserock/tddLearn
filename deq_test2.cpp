@@ -98,10 +98,18 @@ template <typename C, typename F, typename P>
 
 TEST(DeqTestCreate, Trivial)
 {
-    deq<int> di;
+    deq<int,16,MockVector> di;
+    MockVector deq<int,16,MockVector>::* vp = getMock();
+    MockVector &vec = di.*vp;
 
+    EXPECT_CALL(vec, push_back(_)).Times(0);
+    EXPECT_CALL(vec, size()).Times(1);
+    
     EXPECT_TRUE(di.empty());
     EXPECT_EQ(0, di.size());
+
+    //vec.push_back(nullptr);
+    EXPECT_EQ(0, vec.size());
 }
 
 TEST(DeqTestAt, AfterEmpty)
