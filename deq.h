@@ -3,6 +3,7 @@
 #include <type_traits>
 #include <array>
 #include <vector>
+#include <stdexcept>
 
 /// Custom Deque class
 /** feature list:
@@ -30,6 +31,9 @@ class deq
     T &operator[](size_t ind) noexcept;
     const T &operator[](size_t) const noexcept;
 
+    T &at(size_t idx);
+    const T &at(size_t idx) const;
+
   private:
     static const size_t ImplSize = N;
 
@@ -39,6 +43,8 @@ class deq
     impl_t m_v;
     size_t m_beg = 0; ///< begin position (relative?)
     size_t m_end = 0; ///< end position (relative to the begin of the first bucket)
+
+    void checkIndex(size_t idx) const;
 };
 
 template <typename T, size_t N, typename B>
@@ -110,4 +116,28 @@ const T &deq<T, N, B>::operator[](size_t idx) const noexcept
     const auto bufno = idx / ImplSize;
     const auto i = idx % ImplSize;
     return (*m_v[bufno])[i];
+}
+
+template <typename T, size_t N, typename B>
+T &deq<T, N, B>::at(size_t idx)
+{
+    checkIndex(idx);
+    return operator[](idx);
+}
+
+template <typename T, size_t N, typename B>
+const T &deq<T, N, B>::at(size_t idx) const
+{
+    checkIndex(idx);
+    return operator[](idx);
+}
+
+template <typename T, size_t N, typename B>
+void deq<T, N, B>::checkIndex(size_t idx) const
+{
+    if (0 > idx || idx >= size())
+    {
+        std::string e = "Bad index: " + std::to_string(idx);
+        throw std::out_of_range(e.c_str());
+    }
 }
