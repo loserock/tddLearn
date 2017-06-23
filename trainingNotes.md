@@ -344,7 +344,7 @@ Porkoláb Zoltán, ma folytatjuk a kódolást, és mockkolás lesz főleg.
         - `using ::testing::Sequence;`
         - lehet úgy, hogy `EXPECT_CALL(...).InSequence(range1, range2).WillOnce(Return(true))`
         - vagy scope-on belül is:
-            ```
+            ```cpp
             {
                 InSequence dummy;
                 EXPECT_CALL(...)...;
