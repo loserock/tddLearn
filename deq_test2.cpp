@@ -5,10 +5,18 @@
 using ::testing::_;
 using ::testing::Invoke;
 
+using vcon_t = std::array<int, 16> *;
+using vec_t = std::vector<vcon_t>;
+
+struct MockVector : public vec_t
+{
+    MOCK_CONST_METHOD0(size, size_t());
+    MOCK_METHOD1(push_back, void(vcon_t));
+};
+
 //---------------------------------------
 // private access c++ hack preparation
 #pragma region private access preparation
-using vec_t = std::vector<std::array<int, 16> *>;
 
 template <vec_t deq<int>::*PtrValue>
 struct private_access
@@ -18,9 +26,21 @@ struct private_access
 
 vec_t deq<int>::*get();
 template struct private_access<&deq<int>::m_v>;
+
+template <MockVector deq<int, 16, MockVector>::*PtrValue>
+struct private_access2
+{
+    friend MockVector deq<int, 16, MockVector>::*getMock() { return PtrValue; }
+};
+
+// TODO
+MockVector deq<int, 16, MockVector>::*
+getMock();
+template struct private_access2<&deq<int, 16, MockVector>::m_v>;
 #pragma endregion
 //---------------------------------------
 
+/// deq autofill utility function
 template <typename T>
 void fillBack(deq<T> &d, size_t n)
 {
@@ -86,6 +106,7 @@ TEST(DeqTestCreate, Trivial)
 
 TEST(DeqTestAt, AfterEmpty)
 {
+    //deq<int, 16, MockVector> di;
     deq<int> di;
 
     using at_t = int &(deq<int>::*)(size_t);
