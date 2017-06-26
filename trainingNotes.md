@@ -4,9 +4,9 @@ TTD TRAINING @ NNG
 
 ## DAY 1: Bevezetés
 
-_Tollas jegyzetek naptárban_
+_Tollal írt jegyzetek a naptárban_
 
-kovacs.attila@inf.elte.hu
+kovacs (dot) attila (at) inf.elte.hu
 
 ### TTD Cycle
 
