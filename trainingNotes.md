@@ -1,14 +1,25 @@
 
-TTD TRAINING @ NNG
+TDD TRAINING @ NNG
 ==================
 
 ## DAY 1: Bevezetés
 
-_Tollal írt jegyzetek a naptárban_
-
 kovacs (dot) attila (at) inf.elte.hu
 
-### TTD Cycle
+_Tollal írt jegyzetek a naptárban_
+
+ - a _TDD_ kb. 20 éves módszer, az _XP_ egyik eszköze
+ - a _developer_ csinálja (nem a tesztelő)
+ - a **lényeg** a tervezés kikényszerítése
+    - pl. lesz-e jó interface, ami alkalmas a teszteléshez (5 év múlva is)
+    - **nem** optimalizálunk azonnal!
+ - refactor lépés lesz a legnehezebb, ha jól csináljuk
+    - kellenek _toolok_
+    - ha nincs tool, írni kell
+     - az XP javaslata, hogy legyen name convention az egész elején
+ - egy Tesla test kódbázis pl. 100 000 000 sor körül van
+
+### TDD Cycle
 
  - red
  - green
@@ -18,11 +29,33 @@ kovacs (dot) attila (at) inf.elte.hu
 
 #### Red
 
-_ld. jegyzetek_
+(_ld. jegyzetek_ is)
+
+ - writ tests and make them fail
+ - **itt** kell megérteni a problémát
+ - tervezés
+    - interfészek
+    - Design by Contract
+        - előfeltétel
+        - utófeltétel
+        - invariáns
+ - teszteset _lényegét_ dokumentálni
+    - pl. mi a scope
+    - mi az előfeltétel
+ - teszt _orákulum_
+    - ez lehet írott vagy emberi forrás (akár ügyfél)
+ - test run
+    - a korábbi jónak most is jónak kell lennie
+    - az új teszt el **kell** hogy faileljen!
 
 #### Green
 
-_ld. jegyzetek_
+(_ld. jegyzetek_ is)
+
+ - elvben az interfészek kitöltése
+ - gány kód, de működjön!
+ - recommendationön persze ésszel
+ - futtatához jó egy CI _Continous Integration_ (pl. Teamcity)
 
 #### Refactor
 
@@ -52,7 +85,7 @@ _ld. jegyzetek_
     80% redukciót is emlegetnek cikkekben
  - rákényszerít a tervezésre, **ez a lényeg**
  - small steps iterations, hatékonyabb gondolkodásmód
- - az early test az quality növelő, meredeken növekszik a költség, minél később kell megejteni a változtatást, a TTD elég korai fázisban észleli a hibákat
+ - az early test az quality növelő, meredeken növekszik a költség, minél később kell megejteni a változtatást, a TDD elég korai fázisban észleli a hibákat
  - a kód eleve modulárisabb lesz (az kell legyen, kikényszeríti a módszer), átgondoltabb interfészek lesznek
  - autotesztelés lehetővé tétele, folyamatos regresszió
 
@@ -105,7 +138,7 @@ _ld. jegyzetek_
 
 ### Testability
 
- - a TTD business oriented, tehát a business felől is behozzuk a várható teszteseteket, amik relevánsak lehetnek
+ - a TDD business oriented, tehát a business felől is behozzuk a várható teszteseteket, amik relevánsak lehetnek
  - use case vs user story
     - egy use case az egy eset, egy business eset
     - sok user story rendelődik majd egy use case-hez
@@ -147,7 +180,7 @@ _ld. jegyzetek_
 
 ### BDD Behaviour Driven Development
 
- - az ATTD-hez hasonló alapokkal játszik
+ - az ATDD-hez hasonló alapokkal játszik
  - olyankor érdemes használni, ha az _ügyfél_ is képes lenne megérteni a teszteseteket
  - keyword testing
     - szó szerint, egy szöveges fájlba vagy excel-be (vagy GUI-ba) a _nem_ programozó képes lehetne begépelni a kéréseket
