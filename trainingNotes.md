@@ -14,6 +14,8 @@ kovacs (dot) attila (at) inf.elte.hu
  - green
  - refactor
 
+ ![tdd cycle](img/tddcyclewithdesign.gif)
+
 #### Red
 
 _ld. jegyzetek_
@@ -46,13 +48,15 @@ _ld. jegyzetek_
 ### TDD Benefits
 
  - a tesztek miatti nagyobb kódmennyiség _tapasztalat szerint_ nem növeli valósan a költségeket
- - _mérések szerint_ kevesebb debuggal jár
+ - _mérések szerint_ kevesebb debuggal jár,
     80% redukciót is emlegetnek cikkekben
  - rákényszerít a tervezésre, **ez a lényeg**
  - small steps iterations, hatékonyabb gondolkodásmód
  - az early test az quality növelő, meredeken növekszik a költség, minél később kell megejteni a változtatást, a TTD elég korai fázisban észleli a hibákat
  - a kód eleve modulárisabb lesz (az kell legyen, kikényszeríti a módszer), átgondoltabb interfészek lesznek
  - autotesztelés lehetővé tétele, folyamatos regresszió
+
+ ![cost in time](img/comparingTechniques.jpg)
 
 ### TDD Shortcomings
 
@@ -139,6 +143,8 @@ _ld. jegyzetek_
  - ez már csapatos fejlesztői munka
  - a TDD és az ATDD inkább _code oriented_
 
+ ![atdd cycle](img/atdd.png)
+
 ### BDD Behaviour Driven Development
 
  - az ATTD-hez hasonló alapokkal játszik
@@ -153,6 +159,8 @@ _ld. jegyzetek_
  - ez a módszer a _tesztelési piramis_ legfelső fokát emeli ki
  - viszont, c++-ra így hirtelen nem tudunk mondani kész frameworköt
  - ez tehát _customer oriented_
+
+ ![bdd cycle](img/bdd.jpg)
 
 ### Test Quadrants
 
