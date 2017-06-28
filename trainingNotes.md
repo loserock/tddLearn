@@ -6,7 +6,7 @@ TDD TRAINING @ NNG
 
 kovacs (dot) attila (at) inf.elte.hu
 
-_Tollal írt jegyzetek a naptárban_
+(_ld. még tollal írt jegyzetek a naptárban_)
 
  - a _TDD_ kb. 20 éves módszer, az _XP_ egyik eszköze
  - a _developer_ csinálja (nem a tesztelő)
@@ -142,8 +142,8 @@ _Tollal írt jegyzetek a naptárban_
  - use case vs user story
     - egy use case az egy eset, egy business eset
     - sok user story rendelődik majd egy use case-hez
- - the triple A method, AAA: Arrange, Any, Assert. Ez pl. egy lehetőség, lehet ezt is követni, vagy mást is.
- - Given When Then format: ez is egy lehetőség
+ - the triple A method, AAA: Arrange, Act, Assert. Ez pl. egy lehetőség, lehet ezt is követni, vagy mást is.
+ - GWT: Given, When, Then, format. Ez is egy lehetőség.
 
 ### Risk management
 
