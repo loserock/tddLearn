@@ -1,49 +1,93 @@
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
-    "version": "0.1.0",
-    "fileLocation": ["relative", "${workspaceRoot}"],
-    "isShellCommand": true,
-    "showOutput": "always",
+    "version": "2.0.0",
+    "fileLocation": [
+        "relative",
+        "${workspaceRoot}"
+    ],
     "tasks": [
         {
-            "taskName": "build current",
+            "label": "build current",
+            "type": "shell",
             "command": "g++",
-            "args": ["-std=c++14", "-Wall", "-pthread", "-o${fileBasenameNoExtension}", "${fileBasename}", "libs/libgtest.a", "libs/libgmock.a", "libs/libgtest_main.a"],
-            "isShellCommand": true
+            "args": [
+                "-std=c++14",
+                "-Wall",
+                "-pthread",
+                "-o${fileBasenameNoExtension}",
+                "${fileBasename}",
+                "libs/libgtest.a",
+                "libs/libgmock.a",
+                "libs/libgtest_main.a"
+            ],
+            "problemMatcher": []
         },
         {
-            "taskName": "debug build current",
+            "label": "debug build current",
+            "type": "shell",
             "command": "g++",
-            "args": ["-g", "-std=c++14", "-Wall", "-pthread", "-o${fileBasenameNoExtension}", "${fileBasename}", "libs/libgtest.a", "libs/libgmock.a", "libs/libgtest_main.a"],
-            "isShellCommand": true
+            "args": [
+                "-g",
+                "-std=c++14",
+                "-Wall",
+                "-pthread",
+                "-o${fileBasenameNoExtension}",
+                "${fileBasename}",
+                "libs/libgtest.a",
+                "libs/libgmock.a",
+                "libs/libgtest_main.a"
+            ],
+            "problemMatcher": []
         },
         {
-            "taskName": "run current",
+            "label": "run current",
+            "type": "shell",
             "command": "./${fileBasenameNoExtension}",
-            "args": [],
-            "isShellCommand": true,
-            "isBackground": false
+            "problemMatcher": []
         },
         {
-            "taskName": "build main",
+            "label": "build main",
+            "type": "shell",
             "command": "g++",
-            "args": ["-std=c++14", "-Wall", "-pthread", "-o${workspaceRootFolderName}", "main.cpp", "libs/libgtest.a", "libs/libgmock.a", "libs/libgtest_main.a"],
-            "isShellCommand": true,
-            "isBuildCommand": true
+            "args": [
+                "-std=c++14",
+                "-Wall",
+                "-pthread",
+                "-o${workspaceRootFolderName}",
+                "main.cpp",
+                "libs/libgtest.a",
+                "libs/libgmock.a",
+                "libs/libgtest_main.a"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "_id": "build",
+                "isDefault": false
+            }
         },
         {
-            "taskName": "debug build main",
+            "label": "debug build main",
+            "type": "shell",
             "command": "g++",
-            "args": ["-g", "-std=c++14", "-Wall", "-pthread", "-o${workspaceRootFolderName}", "main.cpp", "libs/libgtest.a", "libs/libgmock.a", "libs/libgtest_main.a"],
-            "isShellCommand": true
+            "args": [
+                "-g",
+                "-std=c++14",
+                "-Wall",
+                "-pthread",
+                "-o${workspaceRootFolderName}",
+                "main.cpp",
+                "libs/libgtest.a",
+                "libs/libgmock.a",
+                "libs/libgtest_main.a"
+            ],
+            "problemMatcher": []
         },
         {
-            "taskName": "run main",
+            "label": "run main",
+            "type": "shell",
             "command": "./${workspaceRootFolderName}",
-            "args": [],
-            "isShellCommand": true,
-            "isBackground": false
+            "problemMatcher": []
         }
     ]
 }
