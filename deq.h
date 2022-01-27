@@ -3,6 +3,7 @@
 #include <type_traits>
 #include <array>
 #include <vector>
+#include <string>
 #include <stdexcept>
 
 /// Custom Deque class
@@ -14,7 +15,7 @@
  *  - use a predefined bucket size for optimization
  */
 
-template <typename T, size_t N = 16, typename B = std::vector<std::array<T, N> *>>
+template <typename T, size_t N = 16, typename B = std::vector<std::array<T, N> * > >
 class deq
 {
   public:

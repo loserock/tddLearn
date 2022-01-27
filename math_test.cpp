@@ -9,6 +9,6 @@ TEST(MathTest, TwoPlusTwoEqualsFour)
 
 TEST(MathTest, PowerOf)
 {
-    double r = std::pow(2.0, 10) - 1;
+    double r = pow(2.0, 10) - 1; // a BUG
     EXPECT_EQ(r, 1<<10);
 }
